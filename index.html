@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khalil Buckmire — Energy & Mineral Engineering</title>
+  <meta name="description" content="PhD candidate in Energy & Mineral Engineering at Penn State. Software for petroleum, geothermal, and mining systems." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1f2b;
+      --ink-soft: #3d4451;
+      --ink-muted: #6b7280;
+      --ink-faint: #9ca3af;
+      --paper: #f8f6f1;
+      --paper-soft: #efece4;
+      --rule: #d8d3c5;
+      --accent: #8b3a1f;        /* Iron-oxide red — geology adjacent */
+      --accent-soft: #c47a5a;
+      --accent-faint: #e9d8cf;
+      --serif: "Fraunces", Georgia, "Times New Roman", serif;
+      --sans: "Source Sans 3", -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+      background-color: var(--paper);
+      background-image:
+        radial-gradient(circle at 20% 10%, rgba(139, 58, 31, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 80% 90%, rgba(61, 68, 81, 0.04) 0%, transparent 50%);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ====================== HEADER ====================== */
+    header {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-faint);
+      letter-spacing: 0.1em;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background-color: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 24px;
+      font-variation-settings: "opsz" 144;
+    }
+
+    .tagline {
+      font-family: var(--serif);
+      font-size: clamp(18px, 2vw, 22px);
+      font-style: italic;
+      color: var(--ink-soft);
+      max-width: 640px;
+      line-height: 1.45;
+      font-variation-settings: "opsz" 14;
+    }
+
+    .header-meta {
+      margin-top: 36px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+
+    .header-meta a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 1px;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .header-meta a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .header-meta span.label {
+      color: var(--ink-faint);
+      margin-right: 8px;
+    }
+
+    /* ====================== ABOUT ====================== */
+    section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--ink-faint);
+      margin-bottom: 32px;
+    }
+
+    .section-label .num {
+      color: var(--accent);
+      margin-right: 12px;
+    }
+
+    .about-text {
+      font-family: var(--serif);
+      font-size: 22px;
+      line-height: 1.55;
+      color: var(--ink);
+      max-width: 720px;
+      font-weight: 400;
+      font-variation-settings: "opsz" 24;
+    }
+
+    .about-text + .about-text {
+      margin-top: 24px;
+    }
+
+    .about-text .accent-text {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    /* ====================== PROJECTS ====================== */
+    .projects-intro {
+      max-width: 640px;
+      margin-bottom: 56px;
+      font-size: 17px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 96px;
+      align-items: center;
+    }
+
+    .project:last-child {
+      margin-bottom: 0;
+    }
+
+    .project:nth-child(odd) .project-image {
+      order: 2;
+    }
+
+    .project-image {
+      position: relative;
+      background-color: white;
+      border: 1px solid var(--rule);
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(26, 31, 43, 0.04), 0 8px 24px rgba(26, 31, 43, 0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .project-image::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      width: 64px;
+      height: 64px;
+      background-color: var(--accent-faint);
+      z-index: -1;
+    }
+
+    .project:hover .project-image {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(26, 31, 43, 0.06), 0 16px 40px rgba(26, 31, 43, 0.08);
+    }
+
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .project h3 {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+      color: var(--ink);
+      font-variation-settings: "opsz" 36;
+    }
+
+    .project-summary {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin-bottom: 24px;
+    }
+
+    .project-points {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .project-points li {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .project-points li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .project-link {
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--ink);
+      transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-link:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      transform: translateX(2px);
+    }
+
+    .project-link .arrow {
+      transition: transform 0.15s ease;
+    }
+
+    .project-link:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    /* ====================== EXPERIENCE ====================== */
+    .experience-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 24px 40px;
+    }
+
+    .experience-item {
+      display: contents;
+    }
+
+    .experience-period {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-faint);
+      padding-top: 4px;
+      line-height: 1.5;
+    }
+
+    .experience-body {
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .experience-item:last-child .experience-body {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .experience-org {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 4px;
+      font-variation-settings: "opsz" 24;
+    }
+
+    .experience-role {
+      font-size: 14px;
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-family: var(--mono);
+      font-style: normal;
+    }
+
+    .experience-description {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    /* ====================== SKILLS ====================== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 48px;
+    }
+
+    .skills-group h4 {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--ink-faint);
+      margin-bottom: 16px;
+    }
+
+    .skills-list {
+      list-style: none;
+    }
+
+    .skills-list li {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--ink);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .skills-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* ====================== CONTACT FOOTER ====================== */
+    footer {
+      padding: 80px 0 60px;
+    }
+
+    .contact-flag {
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--ink-faint);
+      margin-bottom: 24px;
+    }
+
+    .contact-headline {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 36px;
+      max-width: 640px;
+      font-variation-settings: "opsz" 72;
+    }
+
+    .contact-headline a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 2px;
+      transition: opacity 0.15s ease;
+    }
+
+    .contact-headline a:hover {
+      opacity: 0.7;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+
+    .contact-links a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-meta {
+      margin-top: 80px;
+      padding-top: 32px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-faint);
+      letter-spacing: 0.05em;
+    }
+
+    /* ====================== RESPONSIVE ====================== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 24px;
+      }
+      header {
+        padding: 56px 0 40px;
+      }
+      section {
+        padding: 56px 0;
+      }
+      .project {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-bottom: 64px;
+      }
+      .project:nth-child(odd) .project-image {
+        order: 0;
+      }
+      .experience-grid {
+        grid-template-columns: 1fr;
+        gap: 8px 0;
+      }
+      .experience-period {
+        padding-top: 0;
+        margin-top: 8px;
+      }
+      .header-meta {
+        gap: 16px;
+      }
+      .contact-links {
+        flex-direction: column;
+        gap: 16px;
+      }
+      .footer-meta {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    /* Subtle entrance animation */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    header > .container > * {
+      animation: fadeUp 0.6s ease both;
+    }
+
+    header .eyebrow { animation-delay: 0.05s; }
+    header h1 { animation-delay: 0.15s; }
+    header .tagline { animation-delay: 0.3s; }
+    header .header-meta { animation-delay: 0.45s; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="eyebrow">Khalil Buckmire / Portfolio 2026</div>
+      <h1>Energy systems,<br />engineered in code.</h1>
+      <p class="tagline">
+        PhD candidate in Energy &amp; Mineral Engineering at Penn State. Open-source software for petroleum, geothermal, and mining systems — built from professional experience across the energy sector.
+      </p>
+      <div class="header-meta">
+        <span><span class="label">Based in</span>State College, PA</span>
+        <span><span class="label">PhD</span>Penn State (2026)</span>
+        <a href="mailto:khalil.h.buckmire@gmail.com">khalil.h.buckmire@gmail.com</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-label"><span class="num">01</span>About</div>
+      <p class="about-text">
+        I'm a PhD candidate in Energy and Mineral Engineering at Penn State, with a research focus on applying machine learning to subsurface fluid flow in heterogeneous media. My professional experience spans the energy sector — <span class="accent-text">subsurface reserves development at Chevron</span>, geothermal drilling efficiency at Bedrock Energy, mining and emissions engineering at Imerys, and reservoir engineering with the Society of Exploration Geophysicists.
+      </p>
+      <p class="about-text">
+        The projects below are an extension of that work into open source — engineering tools written in Python that capture how I think about real problems in petroleum, geothermal, mining, and renewable energy systems.
+      </p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-label"><span class="num">02</span>Featured Work</div>
+      <p class="projects-intro">
+        A trilogy of open-source projects spanning the petroleum value chain — upstream production forecasting, midstream pipeline hydraulics, and downstream refinery optimization. Each repository includes working code, validated test suites, and demonstration notebooks rendered on GitHub.
+      </p>
+
+      <!-- Project 1: Upstream -->
+      <article class="project">
+        <div class="project-body">
+          <div class="project-tag">Upstream / Reservoir Engineering</div>
+          <h3>Decline curve analysis &amp; probabilistic reserves</h3>
+          <p class="project-summary">
+            Production forecasting and reserves estimation for oil &amp; gas wells, with Bayesian inference (PyMC) extending the classical Arps framework to handle the b&nbsp;&gt;&nbsp;1 pathology in unconventional wells.
+          </p>
+          <ul class="project-points">
+            <li>Arps decline curves plus modern shale models (Duong, modified hyperbolic, stretched exponential)</li>
+            <li>Probabilistic EUR reporting in SPE-PRMS P10 / P50 / P90 convention</li>
+            <li>Bayesian fitting with informative priors from analog wells</li>
+            <li>54 passing tests; two demonstration notebooks</li>
+          </ul>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/khb-git/decline-curve-analysis" target="_blank" rel="noopener">
+              Repository <span class="arrow">→</span>
+            </a>
+            <a class="project-link" href="https://github.com/khb-git/decline-curve-analysis/blob/main/notebooks/02_bayesian_fitting.ipynb" target="_blank" rel="noopener">
+              Notebook <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="images/upstream_preview.png" alt="20-year production forecast fan chart with P10-P90 uncertainty bands around historical data" />
+        </div>
+      </article>
+
+      <!-- Project 2: Midstream -->
+      <article class="project">
+        <div class="project-body">
+          <div class="project-tag">Midstream / Pipeline Engineering</div>
+          <h3>Pipeline hydraulics simulator</h3>
+          <p class="project-summary">
+            Steady-state hydraulic simulation for liquid and gas pipelines, with elevation profiles, pump station modeling, and MAOP constraint checking. Renders the canonical two-panel hydraulic gradient diagram.
+          </p>
+          <ul class="project-points">
+            <li>Colebrook-White friction factor (iterative) and Swamee-Jain (explicit)</li>
+            <li>Darcy-Weisbach for liquids; Weymouth and Panhandle B for gas pipelines</li>
+            <li>Multi-segment networks with pump stations and elevation handling</li>
+            <li>35 passing tests; case study on 500-mile Cushing-to-Houston crude route</li>
+          </ul>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/khb-git/midstream-pipeline-hydraulics" target="_blank" rel="noopener">
+              Repository <span class="arrow">→</span>
+            </a>
+            <a class="project-link" href="https://github.com/khb-git/midstream-pipeline-hydraulics/blob/main/notebooks/01_full_workflow.ipynb" target="_blank" rel="noopener">
+              Notebook <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="images/midstream_preview.png" alt="Hydraulic gradient diagram showing pressure profile with pump stations along a 500-mile pipeline" />
+        </div>
+      </article>
+
+      <!-- Project 3: Downstream -->
+      <article class="project">
+        <div class="project-body">
+          <div class="project-tag">Downstream / Refinery Optimization</div>
+          <h3>Refinery LP — crude slate optimization</h3>
+          <p class="project-summary">
+            Linear programming model for refinery operations: optimal crude slate selection, unit utilization, and product blending under capacity and quality constraints. Solves the canonical refinery planning problem.
+          </p>
+          <ul class="project-points">
+            <li>PuLP-based LP with CBC solver (no external dependencies)</li>
+            <li>Crude assays for WTI, Brent, Arab Light, Maya — light sweet through heavy sour</li>
+            <li>Three configurations: hydroskimming, conversion, complex (with FCC)</li>
+            <li>25 passing tests; Sankey diagrams of material flow through the refinery</li>
+          </ul>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/khb-git/downstream-refinery-lp" target="_blank" rel="noopener">
+              Repository <span class="arrow">→</span>
+            </a>
+            <a class="project-link" href="https://github.com/khb-git/downstream-refinery-lp/blob/main/notebooks/01_full_workflow.ipynb" target="_blank" rel="noopener">
+              Notebook <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="images/downstream_preview.png" alt="Bar chart comparing refining margin per barrel across hydroskim, conversion, and complex refinery configurations" />
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container">
+      <div class="section-label"><span class="num">03</span>Professional Experience</div>
+      <div class="experience-grid">
+
+        <div class="experience-item">
+          <div class="experience-period">Jun — Aug 2025</div>
+          <div class="experience-body">
+            <div class="experience-org">Bedrock Energy</div>
+            <div class="experience-role">Geothermal Intern · U.S. Department of Energy GEODE Consortium</div>
+            <p class="experience-description">
+              Authored technical reports on drilling efficiency based on near-surface lithology and rate of penetration. Transformed conventional geologic reviews into data-driven geothermal insights grounded in geomechanical properties.
+            </p>
+          </div>
+        </div>
+
+        <div class="experience-item">
+          <div class="experience-period">May 2023 — Aug 2025</div>
+          <div class="experience-body">
+            <div class="experience-org">Imerys USA</div>
+            <div class="experience-role">Energy Engineering &amp; GIS Internships · PMA NA Industrial Support Team</div>
+            <p class="experience-description">
+              Built a standardized framework for Specific Energy Consumption reporting and improved its accuracy through comparative analysis. Earlier roles on the emissions and GIS teams produced a 30% increase in data accuracy for energy &amp; emissions reporting under Paris Climate Accord standards, and operational dashboards for material recovery, drilling, and fleet efficiency across quarry operations.
+            </p>
+          </div>
+        </div>
+
+        <div class="experience-item">
+          <div class="experience-period">Jun — Sep 2024</div>
+          <div class="experience-body">
+            <div class="experience-org">Chevron · CTC Innovation</div>
+            <div class="experience-role">Subsurface Intern</div>
+            <p class="experience-description">
+              Developed a GIS / machine learning platform to evaluate P4–P6 reserves in the Wolfcamp A basin, with estimated resource impact in the tens of millions of barrels (~$450MM). Delivered an Intellectual Property document for the project's release.
+            </p>
+          </div>
+        </div>
+
+        <div class="experience-item">
+          <div class="experience-period">Aug 2022 — May 2025</div>
+          <div class="experience-body">
+            <div class="experience-org">Society of Exploration Geophysicists</div>
+            <div class="experience-role">Reservoir Engineer · Geophysicist</div>
+            <p class="experience-description">
+              Led energy exploration work in the Gulf of Mexico (Matagorda Island, Lower Miocene) including seismic-to-well tie, horizon mapping, and lead identification, achieving a 30% geologic chance of success. Previously led CO₂ sequestration modeling (Ship Shoal area) using CMG, with focus on multizone containment. Co-author on SEG conference paper on the Illinois Basin Decatur Project (Shodunke et al., 2023).
+            </p>
+          </div>
+        </div>
+
+        <div class="experience-item">
+          <div class="experience-period">Aug 2021 — Dec 2024</div>
+          <div class="experience-body">
+            <div class="experience-org">The Pennsylvania State University</div>
+            <div class="experience-role">Research &amp; Teaching Assistant · Energy and Mineral Engineering</div>
+            <p class="experience-description">
+              Research with the PSGGMA group applying machine learning to predict geochemical fluid flow, with Python frameworks for 1-D fluid flow in heterogeneous media. Taught a 60-student capstone design class (Petrel, CMG) and assisted in a well logging course.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <div class="section-label"><span class="num">04</span>Skills &amp; Credentials</div>
+      <div class="skills-grid">
+        <div class="skills-group">
+          <h4>Programming</h4>
+          <ul class="skills-list">
+            <li>Python</li>
+            <li>R</li>
+            <li>MATLAB</li>
+          </ul>
+        </div>
+        <div class="skills-group">
+          <h4>Software</h4>
+          <ul class="skills-list">
+            <li>Petrel</li>
+            <li>CMG</li>
+            <li>ArcGIS</li>
+            <li>GAMS</li>
+          </ul>
+        </div>
+        <div class="skills-group">
+          <h4>Languages</h4>
+          <ul class="skills-list">
+            <li>English (native)</li>
+            <li>French (novice)</li>
+            <li>Japanese (beginner)</li>
+          </ul>
+        </div>
+        <div class="skills-group">
+          <h4>Certifications</h4>
+          <ul class="skills-list">
+            <li>PMI Project Management</li>
+            <li>ArcGIS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="contact-flag">Get in touch</div>
+      <h2 class="contact-headline">
+        Open to roles in energy software, reservoir engineering, and energy transition. <a href="mailto:khalil.h.buckmire@gmail.com">Say hello</a>.
+      </h2>
+      <div class="contact-links">
+        <a href="mailto:khalil.h.buckmire@gmail.com">khalil.h.buckmire@gmail.com</a>
+        <a href="https://github.com/khb-git" target="_blank" rel="noopener">github.com/khb-git</a>
+        <a href="https://www.linkedin.com/in/khalil-h-buckmire-417672186" target="_blank" rel="noopener">linkedin.com/in/khalil-h-buckmire</a>
+      </div>
+      <div class="footer-meta">
+        <span>© 2026 Khalil Buckmire</span>
+        <span>Built with HTML, hosted on GitHub Pages</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
