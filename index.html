@@ -570,7 +570,7 @@
     <div class="container">
       <div class="section-label"><span class="num">02</span>Featured Work</div>
       <p class="projects-intro">
-        A trilogy of open-source projects spanning the petroleum value chain — upstream production forecasting, midstream pipeline hydraulics, and downstream refinery optimization. Each repository includes working code, validated test suites, and demonstration notebooks rendered on GitHub.
+        Open-source engineering projects spanning the petroleum value chain — upstream production forecasting, midstream pipeline hydraulics, and downstream refinery optimization — and extending into geothermal power systems. Each repository includes working code, validated test suites, and demonstration notebooks.
       </p>
 
       <!-- Project 1: Upstream -->
@@ -654,6 +654,37 @@
         </div>
         <div class="project-image">
           <img src="images/downstream_preview.png" alt="Bar chart comparing refining margin per barrel across hydroskim, conversion, and complex refinery configurations" />
+        </div>
+      </article>
+
+      <!-- Project 4: Geothermal -->
+      <article class="project">
+        <div class="project-body">
+          <div class="project-tag">Geothermal / Power Cycle Engineering</div>
+          <h3>Geothermal binary ORC simulator</h3>
+          <p class="project-summary">
+            A literature-grade model of a binary (Organic Rankine Cycle) geothermal power plant — coupling cycle thermodynamics to a brine resource, sizing the plant to the evaporator pinch, and closing full energy and exergy balances.
+          </p>
+          <ul class="project-points">
+            <li>CoolProp-backed four-point cycle; energy and exergy balances close to machine precision</li>
+            <li>Evaporator pinch from a duty-swept T–Q profile; net-power optimization over evaporation temperature</li>
+            <li>Silica scaling (Fournier–Rowe) sets the reinjection floor; Snyder thermal-decline model over field life</li>
+            <li>90 passing tests; demonstration notebook with an interactive design explorer</li>
+          </ul>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/khb-git/geothermal-orc" target="_blank" rel="noopener">
+              Repository <span class="arrow">→</span>
+            </a>
+            <a class="project-link" href="https://github.com/khb-git/geothermal-orc/blob/main/notebooks/demo.ipynb" target="_blank" rel="noopener">
+              Notebook <span class="arrow">→</span>
+            </a>
+            <a class="project-link" href="https://colab.research.google.com/github/khb-git/geothermal-orc/blob/main/notebooks/demo.ipynb" target="_blank" rel="noopener">
+              Live demo <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+        <div class="project-image">
+          <img src="images/geothermal_preview.png" alt="Evaporator temperature–duty diagram showing the geothermal brine and working-fluid curves converging at a 5 K pinch" />
         </div>
       </article>
 
